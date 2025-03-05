@@ -29,7 +29,7 @@ ProductDAO pd = new ProductDAO();
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shoes Shop Products</title>
+        <title>Porsche</title>
         <%@include file="includes/head.jsp" %>
         <style>
             .card-img-top:hover {

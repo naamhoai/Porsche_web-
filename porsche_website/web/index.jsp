@@ -31,7 +31,7 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>PRJ301-nhóm súc vật</title>
+        <title>PRJ301-Chan de chan manh len</title>
         <%@include file="includes/head.jsp" %>
         <script type="text/javascript">
             function doImage(id) {
@@ -42,7 +42,7 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
     </head>
     <body>
         <%@include file="includes/navbar.jsp" %>
-        <div class="container">
+        <div class="container-fluid">
             <div id="carouselExampleIndicators" class="carousel slide mt-3" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -53,35 +53,35 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="images/slider1.jpg" alt="First slide" style="height: 500px; width: 100%">
+                        <img class="d-block w-100" src="images/slider1.jpg" alt="First slide" style="height: 550px; width: 100%">
                         <div class="carousel-caption d-none d-md-block text-lg-left" style="left: 5%">
                             <h2>Bản Sắc. Thời Thượng.</h2>
                             <h5>Macan thuần điện mới.</h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider2.jpg" alt="Second slide"  style="height: 500px; width: 100%">
+                        <img class="d-block w-100" src="images/slider2.jpg" alt="Second slide"  style="height: 550px; width: 100%">
                         <div class="carousel-caption d-none d-md-block text-lg-left"  style="left: 5%">
                             <h2>Xa hơn cùng nhau.</h2>
                             <h5>Dòng xe Cayenne.</h5>
                         </div>
                     </div>                    
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider3.jpg" alt="Second slide"  style="height: 500px; width: 100%">
+                        <img class="d-block w-100" src="images/slider3.jpg" alt="Second slide"  style="height: 550px; width: 100%">
                         <div class="carousel-caption d-none d-md-block text-lg-left"  style="left: 5%">
                             <h2>Cam đảm dẫn đầu</h2>
                             <h5>Macan S mới.</h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider4.jpg" alt="Second slide"  style="height: 500px; width: 100%">
+                        <img class="d-block w-100" src="images/slider4.jpg" alt="Second slide"  style="height: 550px; width: 100%">
                         <div class="carousel-caption d-none d-md-block text-lg-left"  style="left: 5%">
                             <h2>Cỗ Máy Kinh Điển</h2>
                             <h5>911 Turbo S.</h5>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="images/slider5.jpg" alt="Third slide"  style="height: 500px; width: 100%">
+                        <img class="d-block w-100" src="images/slider5.jpg" alt="Third slide"  style="height: 550px; width: 100%">
                         <div class="carousel-caption d-none d-md-block text-lg-right position-absolute" style="bottom: 75%; right: 10%">
                             <h2  style="color: black">Thể thao thuần khiết</h2>
                             <h5  style="color: black">Dòng xe 718 Boxster và 718 Cayman.</h5>
@@ -118,7 +118,7 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             <form action="search-name" method="post">
                 <div class="form-group">
                     <label>Tìm kiếm: </label>
-                    <input type="text" class="form-control" name="name" placeholder="nội dung" required/>
+                    <input type="text" class="form-control" name="name" placeholder="Nội Dung" required/>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Tìm Kiếm</button>

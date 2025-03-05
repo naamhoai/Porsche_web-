@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="index.jsp">Shoes Shop</a>
+    <div class="container-fluid" style="background-color: white"> 
+        
+        <img style="width: 110px; height: 60px" 
+                 src="https://porsche-vietnam.vn/wp-content/themes/porsche-2018/images/porsche-logo.jpg" alt="Porsche Logo">
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

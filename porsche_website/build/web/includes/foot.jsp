@@ -2,19 +2,19 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-        <h5 class="text-uppercase mb-3">Shoes Shop</h5>
+        <h5 class="text-uppercase mb-3">Porsche</h5>
         <ul class="list-unstyled mb-0">
-          <li><a href="#" class="text-muted">Email: admin1@gmail.com</a></li>
+          <li><a href="#" class="text-muted">Email: admin@gmail.com</a></li>
           <li><a href="#" class="text-muted">Phone: 0123456789</a></li>
           <li><a href="#" class="text-muted">Address: FPTU</a></li>
         </ul>
       </div>
       <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-        <h5 class="text-uppercase mb-3">Products</h5>
+        <h5 class="text-uppercase mb-3">Center Porsche</h5>
         <ul class="list-unstyled mb-0">
-          <li><a href="#" class="text-muted">Max price</a></li>
-          <li><a href="#" class="text-muted">Newest</a></li>
-          <li><a href="#" class="text-muted">Most liked</a></li>
+          <li><a href="#" class="text-muted">Porsche Sai Gon</a></li>
+          <li><a href="#" class="text-muted">Porsche Ha Noi</a></li>
+          <li><a href="#" class="text-muted">Posrche Studio Ha Noi</a></li>
         </ul>
       </div>
       <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -29,13 +29,13 @@
         <h5 class="text-uppercase mb-3">Follow Us</h5>
         <ul class="list-inline mb-0">
           <li class="list-inline-item">
-            <a href="#" class="text-muted"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="text-muted" style="font-size: x-large"><i class="fab fa-facebook-f"></i></a>
           </li>
           <li class="list-inline-item">
-            <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-muted" style="font-size: x-large"><i class="fab fa-youtube"></i></a>
           </li>
           <li class="list-inline-item">
-            <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-muted" style="font-size: x-large"><i class="fab fa-instagram"></i></a>
           </li>
         </ul>
       </div>

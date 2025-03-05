@@ -43,7 +43,7 @@ CREATE TABLE orders_details (
 
 INSERT INTO products (name, description, category, price, stock, image)
 VALUES
-('Nike Air Force 1', 'Classic sports shoes from Nike', 'Sports Shoes', 120, 50, 'image1.jpg'),
+('Nike Air Force 1', 'Classic sports shoes from Nike', 'Sports Shoes', 120, 50, 'null'),
 ('Adidas Ultraboost', 'Premium running shoes from Adidas', 'Running Shoes', 180, 50, 'image2.jpg'),
 ('Converse Chuck Taylor', 'Indispensable commemorative shoes', 'Sports Shoes', 55, 50, 'image3.jpg'),
 ('Vans Old Skool', 'Stylish sports shoes from Vans', 'Sports Shoes', 60, 50, 'image4.jpg'),
