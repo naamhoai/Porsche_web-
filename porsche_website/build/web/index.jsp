@@ -18,7 +18,7 @@
     }
     
     ProductDAO pd = new ProductDAO();
-    List<Product> products = pd.getAllProducts();
+    List<Product> products = pd.getProducts1Category();
     List<Product> products4 = pd.get4Products();
     
 ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
@@ -101,22 +101,19 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             <br/>
             <h2 class="text-center mb-5">Thế giới Porsche</h2>
 
-            <form action="search-name" method="post">
-                <div class="form-group">
-                    <label>Tìm kiếm: </label>
-                    <input type="text" class="form-control" name="name" placeholder="Nội Dung" required/>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
-                    <button type="reset" class="btn btn-primary">Xóa</button>
+            <form action="search-name" method="post" style="margin: 0px 500px 80px 500px">
+                <div class="form-group d-flex align-items-center">
+                    <input type="text" class="form-control me-2" name="name" placeholder="🔍 Tìm kiếm" required/>
+                    <button type="reset" class="btn btn-secondary">Delete</button>
                 </div>
             </form>
-            <br/>
+
             <div class="row">
                 <c:forEach items="<%= products%>" var="c">
                     <div class="col-md-4 pb-3">
-                        <div class="card w-100" style="width: 18rem; position: relative;">
-                            <image class="card-img-top" src="images/${c.getImage()}" alt="${c.getImage()}" style="height: 35%; width: auto;" onclick="doImage('${c.getId()}')"/>
+                        <div class="card w-100" style="width: 1px; position: relative; margin-bottom: 50px">
+                            <image class="card-img-top" src="images/${c.getImage()}" alt="${c.getImage()}" style="height: 35%; width: auto;"
+                                   onclick="doImage('${c.getId()}')"/>
                             <div class="card-body">
                                 <h5 class="card-title" style="text-align: center">${c.getName()}</h5>
                             </div>
@@ -126,6 +123,8 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             </div>
         </div>
 
+        
+        
         <%@include file="includes/foot.jsp" %>
 
         <%@include file="includes/footer.jsp" %>

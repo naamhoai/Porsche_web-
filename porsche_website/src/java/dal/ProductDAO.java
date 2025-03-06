@@ -17,7 +17,7 @@ import model.Product;
  * @author Admin
  */
 public class ProductDAO extends DBContext {
-    
+
     public List<Product> getAllProducts() {
         List<Product> list = new ArrayList<>();
         String sql = "select * from products";
@@ -40,7 +40,36 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
+    public List<Product> getProducts1Category() {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "FROM products p\n"
+                + "WHERE id = (\n"
+                + "    SELECT MIN(id) \n"
+                + "    FROM products \n"
+                + "    WHERE category= p.category\n"
+                + ");";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setDescription(rs.getString("description"));
+                p.setCategory(rs.getString("category"));
+                p.setPrice(rs.getDouble("price"));
+                p.setStock(rs.getInt("stock"));
+                p.setImage(rs.getString("image"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
     public Product getSingleProduct(int id) {
         Product p = null;
         try {
@@ -62,10 +91,10 @@ public class ProductDAO extends DBContext {
         }
         return p;
     }
-    
+
     public double getTotalCartPrice(ArrayList<Cart> cartList) {
         double sum = 0;
-        
+
         try {
             if (!cartList.isEmpty()) {
                 for (Cart item : cartList) {
@@ -78,13 +107,13 @@ public class ProductDAO extends DBContext {
                     }
                 }
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
         return sum;
     }
-    
+
     public List<Cart> getCartProducts(ArrayList<Cart> cartList) {
         List<Cart> book = new ArrayList<>();
         String sql = "select * from products where id=?";
@@ -106,16 +135,16 @@ public class ProductDAO extends DBContext {
                         row.setQuantity(item.getQuantity());
                         book.add(row);
                     }
-                    
+
                 }
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return book;
     }
-    
+
     public List<Product> get3ProductsByCategory(String name, int id) {
         List<Product> list = new ArrayList<>();
         String sql = "select top 3 * from products\n"
@@ -140,7 +169,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public int getTotalProducts() {
         String sql = "select count(*) from products";
         try {
@@ -154,7 +183,7 @@ public class ProductDAO extends DBContext {
         }
         return 0;
     }
-    
+
     public void addProduct(Product product) {
         try {
             String sql = "INSERT INTO products (name, description, category, price, stock, image) values(?,?,?,?,?,?)";
@@ -170,7 +199,7 @@ public class ProductDAO extends DBContext {
             System.out.println(e);
         }
     }
-    
+
     public void updateProduct(Product c) {
         String sql = "update products set name=?, description=?, category=?, price=?, stock=?, image=? where id=?";
         try {
@@ -187,7 +216,7 @@ public class ProductDAO extends DBContext {
             System.out.println(e);
         }
     }
-    
+
     public void delete(int id) {
         String sql = "delete from products where id=?";
         try {
@@ -198,7 +227,7 @@ public class ProductDAO extends DBContext {
             System.out.println(e);
         }
     }
-    
+
     public List<String> getCategories() {
         List<String> list = new ArrayList<>();
         try {
@@ -212,7 +241,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Product> pagingProducts(int index) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from products\n"
@@ -237,7 +266,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Product> getProductsByCategory(String name, int index) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from products\n"
@@ -264,7 +293,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public int getTotalProductsByCategory(String category) {
         String sql = "select count(*) from products where category like ?";
         try {
@@ -279,7 +308,7 @@ public class ProductDAO extends DBContext {
         }
         return 0;
     }
-    
+
     public List<Product> getProductsByPrice(int index) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from products order by price asc offset ? rows fetch next 6 rows only";
@@ -302,7 +331,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Product> get4Products() {
         List<Product> list = new ArrayList<>();
         String sql = "select top 4 * from products order by price desc";
@@ -325,7 +354,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Product> getProductsByName(String name, int index) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from products\n"
@@ -352,7 +381,7 @@ public class ProductDAO extends DBContext {
         }
         return list;
     }
-    
+
     public int getTotalProductsByName(String name) {
         String sql = "select count(*) from products where name like ?";
         try {

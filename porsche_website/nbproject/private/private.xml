@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/Spring%202025/PRJ301/Asignment/Porsche_web-/porsche_website/web/includes/hashSet.jsp</file>
+            <file>file:/E:/Spring%202025/PRJ301/Asignment/Porsche_web-/porsche_website/web/index.jsp</file>
+            <file>file:/E:/Spring%202025/PRJ301/Asignment/Porsche_web-/porsche_website/src/java/controller/ProductDetailServlet.java</file>
+            <file>file:/E:/Spring%202025/PRJ301/Asignment/Porsche_web-/porsche_website/src/java/dal/ProductDAO.java</file>
+            <file>file:/E:/Spring%202025/PRJ301/Asignment/Porsche_web-/porsche_website/web/product.jsp</file>
+            <file>file:/E:/Spring%202025/PRJ301/Asignment/Porsche_web-/porsche_website/web/productdetail.jsp</file>
+        </group>
     </open-files>
 </project-private>

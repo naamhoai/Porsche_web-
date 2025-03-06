@@ -66,7 +66,7 @@ ProductDAO pd = new ProductDAO();
     <body>
         <%@include file="includes/navbar.jsp" %>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="card-header my-3">All Products</div>
             <div class="row">
                 <div class="col-md-3 card w-50 mx-auto">
