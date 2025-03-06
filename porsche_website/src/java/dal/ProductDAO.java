@@ -396,4 +396,30 @@ public class ProductDAO extends DBContext {
         }
         return 0;
     }
+
+    public Product getCarById(int id) {
+        Product product = null;
+        try {
+            String query = "SELECT * FROM products WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(query); // Sửa 'con' thành 'connection'
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                product = new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getString("category"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock"),
+                        rs.getString("image")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return product; 
+    }
+
 }

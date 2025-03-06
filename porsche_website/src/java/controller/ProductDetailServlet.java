@@ -60,19 +60,40 @@ public class ProductDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
+        
+        // Lấy tham số ID từ request
         String id_raw = request.getParameter("id");
-        int id;
-        ProductDAO pdao = new ProductDAO();
+        
+        // Kiểm tra nếu ID không hợp lệ
+        if (id_raw == null || id_raw.isEmpty()) {
+            response.sendRedirect("error.jsp"); // Chuyển hướng đến trang lỗi
+            return;
+        }
+
         try {
-            id = Integer.parseInt(id_raw);
+            int id = Integer.parseInt(id_raw);
+            ProductDAO pdao = new ProductDAO();
             Product product = pdao.getSingleProduct(id);
+
+            // Kiểm tra nếu không tìm thấy sản phẩm
+            if (product == null) {
+                response.sendRedirect("error.jsp"); // Chuyển hướng nếu sản phẩm không tồn tại
+                return;
+            }
+
+            // Lấy danh sách 3 sản phẩm cùng loại (loại bỏ sản phẩm hiện tại)
             List<Product> list = pdao.get3ProductsByCategory(product.getCategory(), product.getId());
+
+            // Đặt dữ liệu vào request để gửi đến JSP
             request.setAttribute("product", product);
             request.setAttribute("list", list);
+
+            // Chuyển tiếp sang productdetail.jsp
             request.getRequestDispatcher("productdetail.jsp").forward(request, response);
+
         } catch (NumberFormatException e) {
-            System.out.println(e);
+            e.printStackTrace(); // Log lỗi
+            response.sendRedirect("error.jsp"); // Chuyển hướng đến trang lỗi
         }
     }
 
@@ -88,6 +109,7 @@ public class ProductDetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        doGet(request, response);
     }
 
     /**

@@ -85,7 +85,7 @@
                     </table>
 
                     <div style="text-align: center;" class="clearfix">
-                        <div class="hint-text">Showing <b>${requestScope.tag}</b> out of <b>${requestScope.endP}</b> entries</div>
+                        <div class="hint-text"> <b>${requestScope.tag}</b> out of <b>${requestScope.endP}</b></div>
                         <ul class="pagination" style="display: flex; align-items: center; justify-content: center;">
                             <c:if test="${requestScope.tag>1}">
                                 <li class="page-item">

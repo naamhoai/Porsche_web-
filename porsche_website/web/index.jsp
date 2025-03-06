@@ -31,7 +31,7 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>PRJ301-Chan de chan manh len</title>
+        <title>PRJ301-Chan de chan manh len--+</title>
         <%@include file="includes/head.jsp" %>
         <script type="text/javascript">
             function doImage(id) {
@@ -122,8 +122,6 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
                 </c:forEach>
             </div>
         </div>
-
-        
         
         <%@include file="includes/foot.jsp" %>
 

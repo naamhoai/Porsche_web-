@@ -41,6 +41,19 @@ CREATE TABLE orders_details (
   CONSTRAINT fk_product FOREIGN KEY (pid) REFERENCES products(id)  
 );
 
+CREATE TABLE CarSpecifications (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    product_id INT NOT NULL,
+    power NVARCHAR(50),
+    torque NVARCHAR(50),
+    acceleration NVARCHAR(50),
+    max_speed NVARCHAR(50),
+    fuel_consumption NVARCHAR(50),
+    co2_emission NVARCHAR(50),
+    price FLOAT NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
 INSERT INTO products (name, description, category, price, stock, image)
 VALUES
 ('Porsche 718 Cayman', N'Mẫu coupe thể thao sang trọng từ Porsche', '718', 6500000000, 10, 'image1.jpg'),
