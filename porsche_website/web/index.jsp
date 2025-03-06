@@ -98,20 +98,6 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
                 </a>
             </div>
             <br/>
-            <h2 class="text-center mb-5">Các dòng xe</h2> <!-- database requeired.......................... -->
-            <div class="row">
-                <c:forEach var="c" items="<%= products4%>">
-                    <div class="col-md-3 col-6 mb-4">
-                        <div class="card h-100">
-                            <img src="images/${c.getImage()}" class="card-img-top" alt="${c.getName()}" onclick="doImage('${c.getId()}')">
-                            <div class="card-body">
-                                <h5 class="card-title">${c.getName()}</h5>
-                                <p class="card-text">${c.getPrice()}</p>
-                            </div>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
             <br/>
             <h2 class="text-center mb-5">Thế giới Porsche</h2>
 
@@ -130,19 +116,9 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
                 <c:forEach items="<%= products%>" var="c">
                     <div class="col-md-4 pb-3">
                         <div class="card w-100" style="width: 18rem; position: relative;">
-                            <image class="card-img-top" src="images/${c.getImage()}" alt="${c.getImage()}" style="height: 180px; width: auto;" onclick="doImage('${c.getId()}')"/>
+                            <image class="card-img-top" src="images/${c.getImage()}" alt="${c.getImage()}" style="height: 35%; width: auto;" onclick="doImage('${c.getId()}')"/>
                             <div class="card-body">
-                                <h5 class="card-title">${c.getName()}</h5>
-                                <div class="price-box" style="display: flex; align-items: center; justify-content: space-between;">
-                                    <p style="font-weight: bold;">Price:</p> 
-                                    <p>$<fmt:formatNumber value="${c.getPrice()}" type="number" maxFractionDigits="2"/></p>
-                                </div>
-                                <div class="description">${c.getDescription()}</div>
-                                <h6 class="category">Category: <a href="search-category?category=${c.getCategory()}">${c.getCategory()}</a></h6>
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <a href="add-to-cart?id=${c.getId()}" class="btn btn-dark">Add to cart</a>
-                                    <a href="order-now?quantity=1&id=${c.getId()}" class="btn btn-primary">Buy now</a>
-                                </div>
+                                <h5 class="card-title" style="text-align: center">${c.getName()}</h5>
                             </div>
                         </div>
                     </div>

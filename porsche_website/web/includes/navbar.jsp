@@ -37,6 +37,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="signup.jsp">Sign up</a>
                 </li>
+                
                 <%
                     }
                 %>
