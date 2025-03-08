@@ -70,7 +70,7 @@
                     <tr>
                         <td><%=c.getName()%></td>
                         <td><%=c.getCategory()%></td>
-                        <td><fmt:formatNumber pattern="##.##" value="<%= c.getPrice() %>"/></td>
+                          <td><fmt:formatNumber value="<%= c.getPrice() %>" type="number" groupingUsed="true" /></td>
                         <td><img src="images/<%= c.getImage() %>" alt="<%= c.getImage() %>" style="height: 200px; width: fit-content"/></td>
                         <td><a href="order-now?id=<%=c.getId() %>" class="btn btn-sm btn-primary">Đặt hàng ngay</a></td>
                         <td><a href="remove-from-cart?id=<%=c.getId() %>" class="btn btn-sm btn-danger">Xóa</a></td>

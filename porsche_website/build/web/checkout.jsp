@@ -44,10 +44,10 @@
             <h1 class="text-center" style="color: blue; margin: 20px 0">Đặt hàng</h1>
             <form action="check-out" method="post">
                 <div class="row">
-                    <div class="col-md-6">
-                        <h2>Billing Address</h2>
+                    <div class="col-md-5">
+                        <h2>Địa chỉ đặt hàng</h2>
                         <div class="form-group">
-                            <label for="name">Name</label>
+                            <label for="name">Tên khách hàng</label>
                             <input type="text" class="form-control" id="name" name="name" value="<%= auth.getName()%>" readonly>
                         </div>
                         <div class="form-group">
@@ -55,22 +55,22 @@
                             <input type="email" class="form-control" id="email" name="email" value="<%= auth.getEmail()%>" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="address">Address</label>
+                            <label for="address">Địa chỉ</label>
                             <input type="text" class="form-control" id="address" name="address" required>
                         </div>
                         <div class="form-group">
-                            <label for="note">Note</label>
+                            <label for="note">Ghi chú</label>
                             <input type="text" class="form-control" id="note" name="note" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <h2>Order Summary</h2>
+                    <div class="col-md-7">
+                        <h2 class="text-center">Tổng đơn hàng</h2>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
+                                    <th>Dòng xe</th>
+                                    <th  class="text-center">Số lượng</th>
+                                    <th  class="text-center">Giá tham khảo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,7 +80,7 @@
                                 %>
                                 <tr>
                                     <td><%=c.getName()%></td>
-                                    <td><fmt:formatNumber pattern="##.##" value="<%= c.getPrice() %>"/></td>
+                                    <td><fmt:formatNumber  value="<%= c.getPrice() %>" type="number" groupingUsed="true" /> VND</td>
                                     <td>
                                         <form action="order-now" method="post" class="form-inline">
                                             <input type="hidden" name="id" value="<%= c.getId()%>" class="form-input">
@@ -98,15 +98,15 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="2">Total price</th>
-                                    <td>$ <fmt:formatNumber pattern="##.##" value="${(total>0)?total:0}"/></td>
+                                    <th colspan="2">Tổng giá tiền dự kiến</th>
+                                    <td><fmt:formatNumber  value="${(total>0)?total:0}" type="number" groupingUsed="true" /> VND</td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Buy</button>
+                    <button type="submit" class="btn btn-primary">Đặt hàng</button>
                 </div>
             </form>
         </div>

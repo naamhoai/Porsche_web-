@@ -78,12 +78,8 @@ public class OrderNowServlet extends HttpServlet {
                 String productId = request.getParameter("id");
                 ProductDAO pdao = new ProductDAO();
                 Product p = pdao.getSingleProduct(Integer.parseInt(productId));
-                int productQuantity = Integer.parseInt(request.getParameter("quantity"));
-                if (productQuantity <= 0) {
-                    productQuantity = 1;
-                }
                 ArrayList<Cart> cart = new ArrayList<>();
-                cart.add(new Cart(p.getId(), p.getName(), p.getDescription(), p.getCategory(), p.getPrice(), p.getStock(), p.getImage(), productQuantity));
+                cart.add(new Cart(p.getId(), p.getName(), p.getDescription(), p.getCategory(), p.getPrice(), p.getStock(), p.getImage(), 1));
                 session.setAttribute("cart", cart);
                 response.sendRedirect("ordernow.jsp");
             } else {
@@ -143,7 +139,7 @@ public class OrderNowServlet extends HttpServlet {
                     cart.clear();
                     request.getSession().removeAttribute("cart");
                     HttpSession session = request.getSession();
-                    session.setAttribute("message", "Ordered successfully");
+                    session.setAttribute("message", "Đặt hàng thành công");
                     response.sendRedirect("orders.jsp");
                 } else {
                     response.sendRedirect("cart.jsp");

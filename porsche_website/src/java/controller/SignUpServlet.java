@@ -50,7 +50,7 @@ public class SignUpServlet extends HttpServlet {
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
         if (!password.equals(repassword)) {
-            request.setAttribute("error", "Incorrect repassword!");
+            request.setAttribute("error", "sai mật khẩu");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         } else {
             UserDAO userDAO = new UserDAO();
@@ -61,7 +61,7 @@ public class SignUpServlet extends HttpServlet {
             u.setRoleid(0);
             u.setPhone(phone);
             userDAO.addUser(u);
-            request.setAttribute("error", "Sign up successfully! Please login!");
+            request.setAttribute("error", "Đăng ký thành công.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }

@@ -69,7 +69,7 @@
                             <thead>
                                 <tr>
                                     <th>Dòng xe</th>
-                                    <th class="text-center">Giá tham khảo</th>
+                                            <th class="text-center">Giá tham khảo</th>
                                     <th class="text-center">Số lượng</th>
                                 </tr>
                             </thead>

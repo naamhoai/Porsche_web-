@@ -80,7 +80,7 @@ public class CheckOutServlet extends HttpServlet {
                     response.sendRedirect("cart.jsp");
                 }
             } else {
-                request.setAttribute("error", "You need to login first!");
+                request.setAttribute("error", "Bạn cần phải đăng nhập trước!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (IOException e) {
@@ -135,13 +135,13 @@ public class CheckOutServlet extends HttpServlet {
                     }
                     cart_list.clear();
                     HttpSession session = request.getSession();
-                    session.setAttribute("message", "Ordered successfully");
+                    session.setAttribute("message", "Đặt hàng thành công");
                     response.sendRedirect("orders.jsp");
                 } else {
                     response.sendRedirect("cart.jsp");
                 }
             } else {
-                request.setAttribute("error", "You need to login first!");
+                request.setAttribute("error", "Bạn cần phải đăng nhập trước!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (IOException e) {

@@ -1,5 +1,5 @@
-﻿CREATE database PorscheDB;
-drop database PorscheDB;
+﻿drop database PorscheDB;
+CREATE database PorscheDB;
 
 use PorscheDB;
 
@@ -44,7 +44,7 @@ CREATE TABLE orders_details (
 CREATE TABLE CarSpec ( 
     id INT IDENTITY(1,1) PRIMARY KEY,
     product_id INT UNIQUE NOT NULL,
-	horsepower NVARCHAR(100) NOT NULL; --công suất động cơ
+	horsepower NVARCHAR(100) NOT NULL, --công suất động cơ
     engine_capacity NVARCHAR(100) NOT NULL, -- Dung tích động cơ
     max_torque NVARCHAR(100) NOT NULL, -- Mô-men xoắn cực đại
     acceleration NVARCHAR(100) NOT NULL, -- Khả năng tăng tốc (0-100 km/h)

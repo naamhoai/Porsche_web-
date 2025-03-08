@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
             UserDAO udao = new UserDAO();
             User user = udao.userLogin(email, password);
             if (user == null) {
-                request.setAttribute("error", "Username or Password is invalid!");
+                request.setAttribute("error", "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu!");
 //                response.sendRedirect("login.jsp");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {

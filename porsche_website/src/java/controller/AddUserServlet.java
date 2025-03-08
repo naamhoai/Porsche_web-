@@ -55,7 +55,7 @@ public class AddUserServlet extends HttpServlet {
         try {
             roleid = Integer.parseInt(roleid_raw);
             if (roleid != 0 && roleid != 1) {
-                request.setAttribute("error", "Incorrect role id!");
+                request.setAttribute("error", "role ID lỗi!");
                 request.getRequestDispatcher("adduser.jsp").forward(request, response);
             } else {
                 User user = udao.getUserByEmail(email);
@@ -68,10 +68,10 @@ public class AddUserServlet extends HttpServlet {
                     u.setPhone(phone);
                     udao.addUserAdmin(u);
                     HttpSession session = request.getSession();
-                    session.setAttribute("message", "User was added successfully");
+                    session.setAttribute("message", "Tài khoản đã đăng ký thành công");
                     response.sendRedirect("show-users");
                 } else {
-                    request.setAttribute("error", "Email existed!");
+                    request.setAttribute("error", "Gmail đã tồn tại!");
                     request.getRequestDispatcher("adduser.jsp").forward(request, response);
                 }
             }

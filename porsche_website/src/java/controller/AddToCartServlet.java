@@ -22,15 +22,6 @@ import model.Cart;
 @WebServlet(name = "AddToCartServlet", urlPatterns = {"/add-to-cart"})
 public class AddToCartServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -72,7 +63,7 @@ public class AddToCartServlet extends HttpServlet {
             if (cart_list == null) {
                 cartList.add(cm);
                 session.setAttribute("cart-list", cartList);
-                session.setAttribute("message", "Product was added to cart successfully");
+                session.setAttribute("message", "Sản phẩm đã được thêm vào danh sách quan tâm");
                 response.sendRedirect("list-product");
             } else {
                 cartList = cart_list;
@@ -87,7 +78,7 @@ public class AddToCartServlet extends HttpServlet {
                         out.println("<title>Servlet AddToCartServlet</title>");
                         out.println("</head>");
                         out.println("<body>");
-                        out.println("<h3 style='color:crimson; text-align: center'>Item Already in Cart. <a href='cart.jsp'>Go to Cart Page</a></h3>");
+                        out.println("<h3 style='color:crimson; text-align: center'>sản phẩm đã tồn tại. <a href='cart.jsp'>Tới trang mua hàng</a></h3>");
                         out.println("</body>");
                         out.println("</html>");
                     }
