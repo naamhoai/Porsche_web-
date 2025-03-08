@@ -67,19 +67,20 @@ ProductDAO pd = new ProductDAO();
         <%@include file="includes/navbar.jsp" %>
 
         <div class="container-fluid">
-            <div class="card-header my-3">All Products</div>
+            <div class="card-header my-3">Thế giới porsche</div>
             <div class="row">
                 <div class="col-md-3 card w-50 mx-auto">
                     <div class="card-body">
                         <form action="search-category">
-                            <label><h5>Search by Category:</h5></label>
+                            <label><h5>Tìm kiếm:</h5></label>
+                            <br/>
                             <c:forEach var="c" items="<%= categories%>">
                                 <input type="submit" name="category" value="${c}"/>
                             </c:forEach>
                         </form>
                         <br/>
-                        <label><h5>Sort products by price: </h5></label>
-                        <button><a href="sort-price">Sort</a></button>
+                        <label><h5>Sắp xếp theo giá: </h5></label>
+                        <button><a href="sort-price">Sắp xếp</a></button>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -91,14 +92,14 @@ ProductDAO pd = new ProductDAO();
                                     <div class="card-body">
                                         <h5 class="card-title">${c.getName()}</h5>
                                         <div class="price-box" style="display: flex; align-items: center; justify-content: space-between;">
-                                            <p style="font-weight: bold;">Price:</p> 
-                                            <p>$<fmt:formatNumber value="${c.getPrice()}" type="number" maxFractionDigits="2"/></p>
+                                            <p style="font-weight: bold;">Giá thành:</p> 
+                                            <p><fmt:formatNumber value="${c.getPrice()}" type="number" groupingUsed="true" /> VND</p>
                                         </div>
                                         <div class="description">${c.getDescription()}</div>
-                                        <h6 class="category">Category: <a href="search-category?category=${c.getCategory()}">${c.getCategory()}</a></h6>
+                                        <h6 class="category">Dòng xe: <a href="search-category?category=${c.getCategory()}">${c.getCategory()}</a></h6>
                                         <div class="mt-3 d-flex justify-content-between">
-                                            <a href="add-to-cart?id=${c.getId()}" class="btn btn-dark">Add to cart</a>
-                                            <a href="order-now?quantity=1&id=${c.getId()}" class="btn btn-primary">Buy now</a>
+                                            <a href="add-to-cart?id=${c.getId()}" class="btn btn-dark">Quan tâm</a>
+                                            <a href="order-now?quantity=1&id=${c.getId()}" class="btn btn-primary">Đặt hàng ngay</a>
                                         </div>
                                     </div>
                                 </div>
@@ -107,11 +108,11 @@ ProductDAO pd = new ProductDAO();
                     </div>
 
                     <div style="text-align: center;" class="clearfix">
-                        <div class="hint-text">Showing <b>${requestScope.tag}</b> out of <b>${requestScope.endP}</b> entries</div>
+                        <div class="hint-text">Trang thứ <b>${requestScope.tag}</b> trong tổng số <b>${requestScope.endP}</b> trang</div>
                         <ul class="pagination" style="display: flex; align-items: center; justify-content: center;">
                             <c:if test="${requestScope.tag>1}">
                                 <li class="page-item">
-                                    <a href="pagination?index=${requestScope.tag-1}" class="page-link" aria-label="Go to previous page">Previous</a>
+                                    <a href="pagination?index=${requestScope.tag-1}" class="page-link" aria-label="Go to previous page">Trang trước</a>
                                 </li>
                             </c:if>
                             <c:forEach begin="1" end="${requestScope.endP}" var="i">
@@ -121,7 +122,7 @@ ProductDAO pd = new ProductDAO();
                             </c:forEach>
                             <c:if test="${requestScope.tag < requestScope.endP}">
                                 <li class="page-item">
-                                    <a href="pagination?index=${requestScope.tag+1}" class="page-link" aria-label="Go to next page">Next</a>
+                                    <a href="pagination?index=${requestScope.tag+1}" class="page-link" aria-label="Go to next page">Trang tiếp</a>
                                 </li>
                             </c:if>
                         </ul>

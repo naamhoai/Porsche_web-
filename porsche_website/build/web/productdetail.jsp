@@ -9,7 +9,6 @@
 <%@page import="dal.*" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
@@ -33,7 +32,6 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             function doImage(id) {
                 window.location = "product-detail?id=" + id;
             }
-
         </script>
     </head>
     <body>
@@ -41,13 +39,13 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
 
         <div class="container-fluid">
 
-            <div class="card-header my-3">Product Detail</div>
+            <div class="card-header my-3">Thông tin sản phẩm.</div>
 
             <c:set value="${requestScope.product}" var="p"/>
             <div class="car-details-container">
                 <div class="text-container" style="margin-left: 100px">
                     <h1 class="car-title">${p.getName()}</h1>
-                    <p class="car-price">Standard price: 
+                    <p class="car-price">Giá tham khảo từ: 
                         <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" /> VND
                     </p>
                 </div>
@@ -64,20 +62,28 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
                         %>
                         <div class="front-text"> 
                             <div class="specs-item">
-                                <span class="specs-label">Capacity</span>
+                                <span class="specs-label">Công suất</span>
+                                <span class="specs-value"><%= (spec != null) ? spec.getHorsepower() : "N/A" %></span>
+                            </div>
+                            <div class="specs-item">
+                                <span class="specs-label">Dung tích</span>
                                 <span class="specs-value"><%= (spec != null) ? spec.getEngineCapacity() : "N/A" %></span>
                             </div>
                             <div class="specs-item">
-                                <span class="specs-label">Maximum torque</span>
+                                <span class="specs-label">Mô men xoắn cực đại</span>
                                 <span class="specs-value"><%= (spec != null) ? spec.getMaxTorque() : "N/A" %></span>
                             </div>
                             <div class="specs-item">
-                                <span class="specs-label">Acceleration</span>
+                                <span class="specs-label">Tăng tốc từ 0 - 100 km/giờ</span>
                                 <span class="specs-value"><%= (spec != null) ? spec.getAcceleration() : "N/A" %></span>
                             </div>
                             <div class="specs-item">
-                                <span class="specs-label">Maximum speed</span>
-                                <span class="specs-value"><%= (spec != null) ? spec.getMaxSpeed() + " km/h" : "N/A" %></span>
+                                <span class="specs-label">Tốc độ tối đa</span>
+                                <span class="specs-value"><%= (spec != null) ? spec.getMaxSpeed() : "N/A" %></span>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <a href="add-to-cart?id=${spec.getId()}" class="btn btn-dark" style="margin: 5px 15px 0px 0px">Quan tâm</a>
+                                <a href="order-now?quantity=1&id=${spec.getId()}" class="btn btn-primary" style="margin-top: 5px">Mua ngay</a>
                             </div>
                         </div>
                     </div>
@@ -85,7 +91,7 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             </div>
 
 
-            <h4 style="text-align: center; margin: 40px;">Related Products</h4>
+            <h4 style="text-align: center; margin: 40px;">Các dòng xe khác</h4>
 
             <div class="row">
                 <c:forEach var="c" items="${requestScope.list}">
@@ -94,11 +100,11 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
                             <image class="card-img-top" src="images/${c.getImage()}" alt="${c.getImage()}" 
                                    style="height: 200px; width: 100%;" onclick="doImage('${c.getId()}')"/>
                             <div class="card-body">
-                                <h5 class="card-title">${c.getName()}</h5>
+                                <h5 class="card-title" style="display: flex; justify-content: center">${c.getName()}</h5>
+                                <h6 class="card-title" style="display: flex; justify-content: center">Giá tiêu chuẩn: <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" /> VND</h6>
 
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <a href="add-to-cart?id=${c.getId()}" class="btn btn-dark">Add to cart</a>
-                                    <a href="order-now?quantity=1&id=${c.getId()}" class="btn btn-primary">Buy now</a>
+                                <div class="mt-3 d-flex justify-content-center">
+                                    <a href="product-detail?id=${c.getId()}" class="btn btn-primary">xem ngay</a>
                                 </div>
                             </div>
                         </div>

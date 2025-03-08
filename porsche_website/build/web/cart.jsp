@@ -9,7 +9,7 @@
 <%@page import="dal.*" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%    
     User auth = (User) request.getSession().getAttribute("auth");
@@ -33,7 +33,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="includes/head.jsp" %>
-        <title>Cart Page</title>
+        <title>Thanh toán</title>
         <style type="text/css">
             .table tbody td {
                 vertical-align: middle;
@@ -50,16 +50,16 @@
 
         <div class="container my-3">
             <div class="d-flex py-3">
-                <h3>Total Price: $ <fmt:formatNumber pattern="##.##" value="${(total>0)?total:0}"/></h3>
-                <a class="mx-3 btn btn-primary" href="check-out">Check Out</a></div>
+                <h3>Tổng tiền: $ <fmt:formatNumber value="${(total>0)?total:0}" type="number" groupingUsed="true" /> VND</h3>
+                <a class="mx-3 btn btn-primary" href="check-out">Thanh toán tất cả</a></div>
             <table class="table table-light">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Mẫu xe</th>
+                        <th scope="col">Dòng xe</th>
+                        <th scope="col">Giá tiêu chuẩn</th>
+                        <th scope="col">Ảnh tham khảo</th>
+                        <th scope="col">Đặt hàng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,9 +71,9 @@
                         <td><%=c.getName()%></td>
                         <td><%=c.getCategory()%></td>
                         <td><fmt:formatNumber pattern="##.##" value="<%= c.getPrice() %>"/></td>
-                        <td><img src="images/<%= c.getImage() %>" alt="<%= c.getImage() %>" style="height: 180px; width: 300px;"/></td>
-                        <td><a href="order-now?id=<%=c.getId() %>" class="btn btn-sm btn-primary">Buy now</a></td>
-                        <td><a href="remove-from-cart?id=<%=c.getId() %>" class="btn btn-sm btn-danger">Remove</a></td>
+                        <td><img src="images/<%= c.getImage() %>" alt="<%= c.getImage() %>" style="height: 200px; width: fit-content"/></td>
+                        <td><a href="order-now?id=<%=c.getId() %>" class="btn btn-sm btn-primary">Đặt hàng ngay</a></td>
+                        <td><a href="remove-from-cart?id=<%=c.getId() %>" class="btn btn-sm btn-danger">Xóa</a></td>
                     </tr>
 
                     <%

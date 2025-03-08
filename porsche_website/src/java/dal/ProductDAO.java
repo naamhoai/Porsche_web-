@@ -8,7 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import model.Cart;
 import model.Product;
 
@@ -147,12 +150,13 @@ public class ProductDAO extends DBContext {
 
     public List<Product> get3ProductsByCategory(String name, int id) {
         List<Product> list = new ArrayList<>();
-        String sql = "select top 3 * from products\n"
-                + "where category like ? and id <> ?\n";
+        List<Integer> randomIDs = rand3ID(id);
+        String sql = "SELECT * FROM products WHERE id IN (?, ?, ?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, "%" + name + "%");
-            st.setInt(2, id);
+            st.setInt(1, randomIDs.get(0));
+            st.setInt(2, randomIDs.get(1));
+                st.setInt(3, randomIDs.get(2));
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 list.add(new Product(rs.getInt("id"),
@@ -419,7 +423,43 @@ public class ProductDAO extends DBContext {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return product; 
+        return product;
     }
 
+    public List<Integer> rand3ID(int excludedID) {
+        List<Integer> randomIDs = new ArrayList<>();
+        String getMaxID = "SELECT MAX(product_id) FROM CarSpec";
+        int maxID = 0;
+
+        try {
+            PreparedStatement m = connection.prepareStatement(getMaxID);
+            ResultSet max = m.executeQuery();
+
+            if (max.next()) {
+                maxID = max.getInt(1); // Lấy giá trị MAX(product_id)
+            }
+
+            max.close();
+            m.close();
+
+            if (maxID <= 1) {
+                return randomIDs; // Không có đủ ID để chọn
+            }
+            Random random = new Random();
+            Set<Integer> uniqueNumbers = new HashSet<>();
+
+            while (uniqueNumbers.size() < 3) {
+                int randomNumber = random.nextInt(maxID) + 1; // Random từ 1 đến maxID
+                if (randomNumber != excludedID) {
+                    uniqueNumbers.add(randomNumber);
+                }
+            }
+            randomIDs.addAll(uniqueNumbers);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return randomIDs;
+    }
 }

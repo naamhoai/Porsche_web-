@@ -32,7 +32,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="includes/head.jsp" %>
-        <title>Order Page</title>
+        <title>Đặt hàng</title>
         <%
             String message = (String) request.getSession().getAttribute("message");
             if (message!=null && message!="") {
@@ -62,12 +62,12 @@
                 <thead>
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Total Price</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Note</th>
-                        <th scope="col">Details</th>
-                        <th scope="col">Cancel</th>
+                        <th scope="col">Ngày đặt hàng</th>
+                        <th scope="col">Tổng giá trị (dự kiến)</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Ghi chú</th>
+                        <th scope="col">Chi tiết đơn hàng</th>
+                        <th scope="col">Hủy đơn hàng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,11 +78,11 @@
                         <tr>
                             <td>${o.getOid()}</td>
                             <td>${o.getDate()}</td>
-                            <td><fmt:formatNumber pattern="##.##" value="${o.getTotalprice()}"/></td>
+                            <td><fmt:formatNumber value="${o.getTotalprice()}" type="number" groupingUsed="true"/> VND </td>
                             <td>${o.getAddress()}</td>
                             <td>${o.getNote()}</td>
-                            <td><a href="order-detail?id=${o.getOid()}">Details</a></td>
-                            <td><a class="btn btn-sm btn-danger" href="cancel-order?id=${o.getOid()}">Cancel</a></td>
+                            <td><a href="order-detail?id=${o.getOid()}">Chi tiết</a></td>
+                            <td><a class="btn btn-sm btn-danger" href="cancel-order?id=${o.getOid()}">Hủy</a></td>
                         </tr> 
                     </c:forEach>
                     <%

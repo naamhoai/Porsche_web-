@@ -99,12 +99,12 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             </div>
             <br/>
             <br/>
-            <h2 class="text-center mb-5">Thế giới Porsche</h2>
+            <h2 class="text-center mb-5">Tìm chiếc Porsche trong mơ của bạn</h2>
 
             <form action="search-name" method="post" style="margin: 0px 500px 80px 500px">
                 <div class="form-group d-flex align-items-center">
                     <input type="text" class="form-control me-2" name="name" placeholder="🔍 Tìm kiếm" required/>
-                    <button type="reset" class="btn btn-secondary">Delete</button>
+                    <button type="reset" class="btn btn-secondary">Làm mới</button>
                 </div>
             </form>
 

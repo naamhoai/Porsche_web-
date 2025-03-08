@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : orderdetail
     Created on : Feb 14, 2024, 10:04:55 PM
     Author     : Admin
@@ -43,16 +43,16 @@
         <%@include file="includes/navbar.jsp" %>
 
         <div class="container">
-            <div class="card-header my-3">Order detail</div>
+            <div class="card-header my-3">Chi tiết đơn đặt hàng</div>
             <table class="table table-light">
                 <thead>
                     <tr>
-                        <th scope="col">Order ID</th>
-                        <th scope="col">Product ID</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Mã sản phẩm</th>
+                        <th scope="col">Mẫu xe</th>
+                        <th scope="col">Mẫu ảnh</th>
+                        <th scope="col">Giá tham khảo</th>
+                        <th scope="col">Số lượng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +65,7 @@
                             <td>${o.getProduct().getId()}</td>
                             <td><a href="product-detail?id=${o.getProduct().getId()}">${o.getProduct().getName()}</a></td>
                             <td><img src="images/${o.getProduct().getImage()}" alt="${o.getProduct().getName()}" style="height: 180px; width: 300px;"/></td>
-                            <td><fmt:formatNumber pattern="##.##" value="${o.getPrice()}"/></td>
+                            <td><fmt:formatNumber value="${o.getPrice()}" type="number" groupingUsed="true" /> VND</td>
                             <td>${o.getQuantity()}</td>
                         </tr> 
                     </c:forEach>

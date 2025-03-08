@@ -10,12 +10,14 @@ public class ProductDetailDAO extends DBContext {
     public CarSpec getProductDetail(int id) {
         CarSpec p = null;
         try {
-            String sql = "SELECT engine_capacity, max_torque, acceleration, max_speed FROM CarSpec WHERE product_id = ?";
+            String sql = "SELECT horsepower, engine_capacity, max_torque, acceleration, max_speed FROM CarSpec WHERE product_id = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 p = new CarSpec();
+                p.setId(id);
+                p.setHorsepower(rs.getString("horsepower"));
                 p.setEngineCapacity( rs.getString("engine_capacity"));
                 p.setMaxTorque(rs.getString("max_torque"));
                 p.setAcceleration(rs.getString("acceleration"));

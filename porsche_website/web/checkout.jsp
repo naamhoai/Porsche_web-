@@ -41,7 +41,7 @@
         <%@include file="includes/navbar.jsp" %>
 
         <div class="container">
-            <h1 class="text-center" style="color: blue; margin: 20px 0">Checkout</h1>
+            <h1 class="text-center" style="color: blue; margin: 20px 0">Đặt hàng</h1>
             <form action="check-out" method="post">
                 <div class="row">
                     <div class="col-md-6">
