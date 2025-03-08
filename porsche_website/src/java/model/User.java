@@ -16,17 +16,18 @@ public class User {
     private String password;
     private int roleid;
     private String phone;
-
+    private String code;
     public User() {
     }
 
-    public User(int id, String name, String email, String password, int roleid, String phone) {
+    public User(int id, String name, String email, String password, int roleid, String phone, String code) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.roleid = roleid;
         this.phone = phone;
+        this.code = code;
     }
 
     public int getId() {
@@ -44,7 +45,13 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+    public String getcode() {
+        return code;
+    }
 
+    public void setcode(String code) {
+        this.code = code;
+    }
     public String getEmail() {
         return email;
     }

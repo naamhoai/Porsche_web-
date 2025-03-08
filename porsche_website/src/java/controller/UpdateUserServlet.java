@@ -105,7 +105,7 @@ public class UpdateUserServlet extends HttpServlet {
                 request.setAttribute("error", "Incorrect role id!");
                 request.getRequestDispatcher("adduser.jsp").forward(request, response);
             } else {
-                User u = new User(id, name, email, password, roleid, phone);
+                  User u = new User(id, name, email, password, roleid, phone, phone);
 //                u.setName(name);
 //                u.setEmail(email);
 //                u.setPassword(password);

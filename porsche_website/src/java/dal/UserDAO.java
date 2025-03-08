@@ -193,7 +193,8 @@ public class UserDAO extends DBContext {
                         rs.getString("email"),
                         rs.getString("password"),
                         rs.getInt("roleid"),
-                        rs.getString("phone")
+                        rs.getString("phone"),
+                        rs.getString("code")
                 ));
             }
         } catch (SQLException e) {

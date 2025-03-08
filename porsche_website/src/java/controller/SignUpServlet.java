@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.SendEmail;
 import model.User;
 
 /**
@@ -18,6 +19,7 @@ import model.User;
  * @author Admin
  */
 @WebServlet(name = "SignUpServlet", urlPatterns = {"/sign-up"})
+//@WebServlet("/sign-up")
 public class SignUpServlet extends HttpServlet {
 
     /**
@@ -62,7 +64,10 @@ public class SignUpServlet extends HttpServlet {
             u.setPhone(phone);
             userDAO.addUser(u);
             request.setAttribute("error", "Sign up successfully! Please login!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            //ham gui email
+            SendEmail.process(request, u);
+//            request.getRequestDispatcher("verify.jsp").forward(request, response);
+            response.sendRedirect("verify.jsp");
         }
     }
 
@@ -78,7 +83,7 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
     }
 
     /**
