@@ -41,17 +41,14 @@ CREATE TABLE orders_details (
   CONSTRAINT fk_product FOREIGN KEY (pid) REFERENCES products(id)  
 );
 
-CREATE TABLE CarSpecifications (
+CREATE TABLE CarSpec ( 
     id INT IDENTITY(1,1) PRIMARY KEY,
-    product_id INT NOT NULL,
-    power NVARCHAR(50),
-    torque NVARCHAR(50),
-    acceleration NVARCHAR(50),
-    max_speed NVARCHAR(50),
-    fuel_consumption NVARCHAR(50),
-    co2_emission NVARCHAR(50),
-    price FLOAT NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES products(id)
+    product_id INT UNIQUE NOT NULL,
+    engine_capacity NVARCHAR(100) NOT NULL, -- Dung tích động cơ
+    max_torque NVARCHAR(100) NOT NULL, -- Mô-men xoắn cực đại
+    acceleration NVARCHAR(100) NOT NULL, -- Khả năng tăng tốc (0-100 km/h)
+    max_speed NVARCHAR(100) NOT NULL, -- Tốc độ tối đa
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
 INSERT INTO products (name, description, category, price, stock, image)
@@ -75,3 +72,20 @@ INSERT INTO users (fullname, email, password, roleid, phone)
 VALUES
 ('User 1', 'user1@gmail.com', '123', 0, '0123456789'),
 ('Admin 1', 'admin1@gmail.com', '123', 1, '0123456789');
+INSERT INTO CarSpec (product_id, engine_capacity, max_torque, acceleration, max_speed)
+VALUES
+(1, '2.0L Turbo', '380 Nm', '5.1s', '275 km/h'),
+(2, '2.5L Turbo', '420 Nm', '4.7s', '285 km/h'),
+(3, '2.0L Turbo', '380 Nm', '5.1s', '275 km/h'),
+(4, '3.0L Turbo', '450 Nm', '4.2s', '293 km/h'),
+(5, '3.0L Turbo', '530 Nm', '3.7s', '308 km/h'),
+(6, '3.0L Turbo', '530 Nm', '3.9s', '306 km/h'),
+(7, '3.8L Turbo', '750 Nm', '2.7s', '330 km/h'),
+(8, '3.7L Turbo', '600 Nm', '3.5s', '320 km/h'),
+(9, '3.0L Turbo', '570 Nm', '3.4s', '290 km/h'),
+(10, 'Electric', '850 Nm', '2.8s', '260 km/h'),
+(11, 'Electric', '850 Nm', '3.2s', '250 km/h'),
+(12, '4.0L V8', '770 Nm', '3.6s', '315 km/h'),
+(13, '2.0L Turbo', '400 Nm', '5.0s', '270 km/h'),
+(14, 'Electric', '700 Nm', '4.8s', '220 km/h'),
+(15, '4.0L Turbo', '900 Nm', '3.8s', '305 km/h');

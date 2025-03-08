@@ -9,6 +9,7 @@
 <%@page import="dal.*" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.ArrayList" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
@@ -46,7 +47,9 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
             <div class="car-details-container">
                 <div class="text-container" style="margin-left: 100px">
                     <h1 class="car-title">${p.getName()}</h1>
-                    <p class="car-price">Standard price: ${p.getPrice()} VND*</p>
+                    <p class="car-price">Standard price: 
+                        <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" /> VND
+                    </p>
                 </div>
 
                 <div class="specifications d-flex align-items-center">
@@ -54,14 +57,28 @@ ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
                     <img style="width: 600px; margin-left: 100px" src="images/${p.getImage()}" alt="${p.getName()}">
 
                     <div class="specs-container">
-                        
+
                         <%@include file="includes/style.jsp"%>
-                        
+                        <%
+                               CarSpec spec = (CarSpec) request.getAttribute("spec");
+                        %>
                         <div class="front-text"> 
-                            <div class="specs-item"><span class="specs-label">Capacity</span><span class="specs-value"></span></div>
-                            <div class="specs-item"><span class="specs-label">Maximum torque</span><span class="specs-value"></span></div>
-                            <div class="specs-item"><span class="specs-label">Acceleration</span><span class="specs-value"></span></div>
-                            <div class="specs-item"><span class="specs-label">Maximum speed</span><span class="specs-value"> km/h</span></div>
+                            <div class="specs-item">
+                                <span class="specs-label">Capacity</span>
+                                <span class="specs-value"><%= (spec != null) ? spec.getEngineCapacity() : "N/A" %></span>
+                            </div>
+                            <div class="specs-item">
+                                <span class="specs-label">Maximum torque</span>
+                                <span class="specs-value"><%= (spec != null) ? spec.getMaxTorque() : "N/A" %></span>
+                            </div>
+                            <div class="specs-item">
+                                <span class="specs-label">Acceleration</span>
+                                <span class="specs-value"><%= (spec != null) ? spec.getAcceleration() : "N/A" %></span>
+                            </div>
+                            <div class="specs-item">
+                                <span class="specs-label">Maximum speed</span>
+                                <span class="specs-value"><%= (spec != null) ? spec.getMaxSpeed() + " km/h" : "N/A" %></span>
+                            </div>
                         </div>
                     </div>
                 </div>

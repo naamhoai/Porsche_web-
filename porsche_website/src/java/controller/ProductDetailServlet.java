@@ -5,6 +5,7 @@
 package controller;
 
 import dal.ProductDAO;
+import dal.ProductDetailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.CarSpec;
 import model.Product;
 
 /**
@@ -60,10 +62,10 @@ public class ProductDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         // Lấy tham số ID từ request
         String id_raw = request.getParameter("id");
-        
+
         // Kiểm tra nếu ID không hợp lệ
         if (id_raw == null || id_raw.isEmpty()) {
             response.sendRedirect("error.jsp"); // Chuyển hướng đến trang lỗi
@@ -72,11 +74,13 @@ public class ProductDetailServlet extends HttpServlet {
 
         try {
             int id = Integer.parseInt(id_raw);
+            ProductDetailDAO specdao = new ProductDetailDAO();
+            CarSpec spec = specdao.getProductDetail(id);
             ProductDAO pdao = new ProductDAO();
             Product product = pdao.getSingleProduct(id);
 
             // Kiểm tra nếu không tìm thấy sản phẩm
-            if (product == null) {
+            if (spec == null) {
                 response.sendRedirect("error.jsp"); // Chuyển hướng nếu sản phẩm không tồn tại
                 return;
             }
@@ -86,6 +90,7 @@ public class ProductDetailServlet extends HttpServlet {
 
             // Đặt dữ liệu vào request để gửi đến JSP
             request.setAttribute("product", product);
+            request.setAttribute("spec", spec);
             request.setAttribute("list", list);
 
             // Chuyển tiếp sang productdetail.jsp
