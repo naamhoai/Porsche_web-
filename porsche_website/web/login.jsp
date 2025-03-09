@@ -23,7 +23,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="includes/head.jsp" %>
-        <title>Đăng nhập khánh hàng</title>
+        <title>Đăng nhập khách hàng</title>
     </head>
     <body>
         <%@include file="includes/navbar.jsp" %>
@@ -32,11 +32,17 @@
             <div class="card w-50 mx-auto my-5">
                 <div class="card-header text-center">Đăng nhập &nbsp &nbsp | &nbsp &nbsp <a href="signup.jsp" target="target">Đăng ký</a></div>
                 <div class="card-body">
-                    <h2 style="color: red">${requestScope.error}</h2>
+                    <h2 style="color: red; text-align: center;">
+                        <% if (request.getAttribute("error") != null) { %>
+                        <%= request.getAttribute("error") %>
+                        <% } %>
+                    </h2>
                     <form action="user-login" method="post">
                         <div class="form-group">
                             <label>Địa chỉ gmail: </label>
-                            <input type="email" class="form-control" name="login-email" placeholder="Nhập tài khoản gmail vào đây" required/>
+                            <input type="email" class="form-control" name="login-email"
+                                   value="<%= (request.getAttribute("loginEmail") != null) ? request.getAttribute("loginEmail") : "" %>"
+                                   placeholder="Nhập tài khoản gmail vào đây" required/>
                         </div>
                         <div class="form-group">
                             <label>Mật khẩu: </label>

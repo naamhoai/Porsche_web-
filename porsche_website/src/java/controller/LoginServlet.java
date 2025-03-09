@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import dal.UserDAO;
+import dal.ValidDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,101 +11,61 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/user-login"})
 public class LoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         response.sendRedirect("login.jsp");
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        try (PrintWriter out = response.getWriter()) {
+        try {
             String email = request.getParameter("login-email");
             String password = request.getParameter("login-password");
+
             UserDAO udao = new UserDAO();
+            ValidDAO valid = new ValidDAO();
+
+            // Kiểm tra nếu email chưa tồn tại trong DB
+            if (!valid.isEmailExists(email)) {
+                request.setAttribute("error", "❌ Email chưa được đăng ký! Vui lòng kiểm tra lại.");
+                request.setAttribute("loginEmail", email); // Giữ lại email đã nhập
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+
+            // Kiểm tra nếu email đúng nhưng sai mật khẩu
             User user = udao.userLogin(email, password);
             if (user == null) {
-                request.setAttribute("error", "Vui lòng kiểm tra lại tài khoản hoặc mật khẩu!");
-//                response.sendRedirect("login.jsp");
+                request.setAttribute("error", "❌ Mật khẩu không đúng! Vui lòng nhập lại.");
+                request.setAttribute("loginEmail", email);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
-                if (user.getRoleid() == 0) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("auth", user);
-                    response.sendRedirect("index.jsp");
-                }
-                else if (user.getRoleid() == 1) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("auth", user);
-                    response.sendRedirect("to-admin");
-                }
+                return;
             }
+
+            // Nếu đăng nhập thành công
+            HttpSession session = request.getSession();
+            session.setAttribute("auth", user);
+
+            if (user.getRoleid() == 0) {
+                response.sendRedirect("index.jsp"); // Người dùng bình thường
+            } else if (user.getRoleid() == 1) {
+                response.sendRedirect("to-admin"); // Admin
+            }
+
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
+            request.setAttribute("error", "⚠ Đã xảy ra lỗi, vui lòng thử lại.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+        return "Login Servlet";
+    }
 }

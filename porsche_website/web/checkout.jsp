@@ -34,7 +34,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Donate</title>
         <%@include file="includes/head.jsp" %>
     </head>
     <body>
@@ -100,6 +100,8 @@
                                 <tr>
                                     <th colspan="2">Tổng giá tiền dự kiến</th>
                                     <td><fmt:formatNumber  value="${(total>0)?total:0}" type="number" groupingUsed="true" /> VND</td>
+                                    
+                            <img >
                                 </tr>
                             </tfoot>
                         </table>
