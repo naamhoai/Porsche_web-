@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.SendEmail;
 import model.User;
 
 /**
@@ -18,6 +19,7 @@ import model.User;
  * @author Admin
  */
 @WebServlet(name = "SignUpServlet", urlPatterns = {"/sign-up"})
+//@WebServlet("/sign-up")
 public class SignUpServlet extends HttpServlet {
 
     /**
@@ -50,7 +52,7 @@ public class SignUpServlet extends HttpServlet {
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
         if (!password.equals(repassword)) {
-            request.setAttribute("error", "sai mật khẩu");
+            request.setAttribute("error", "Incorrect repassword!");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
         } else {
             UserDAO userDAO = new UserDAO();
@@ -61,8 +63,11 @@ public class SignUpServlet extends HttpServlet {
             u.setRoleid(0);
             u.setPhone(phone);
             userDAO.addUser(u);
-            request.setAttribute("error", "Đăng ký thành công.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.setAttribute("error", "Sign up successfully! Please login!");
+            //ham gui email
+            SendEmail.process(request, u);
+//            request.getRequestDispatcher("verify.jsp").forward(request, response);
+            response.sendRedirect("verify.jsp");
         }
     }
 
@@ -78,7 +83,7 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
     }
 
     /**
