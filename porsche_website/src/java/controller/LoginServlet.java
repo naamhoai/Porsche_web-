@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "⚠ Đã xảy ra lỗi, vui lòng thử lại.");
+            request.setAttribute("error", "⚠ Tài khoản và mật khẩu không hợp lệ");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
