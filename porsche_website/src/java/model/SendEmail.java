@@ -36,20 +36,21 @@ public class SendEmail {
     }
 
     public static void SentEmail(User user, String gr) {
-        // Thông tin tài khoản email
-        String host = "smtp.gmail.com"; // SMTP server của Gmail
-        String port = "587"; // Port cho SMTP
-        String username = "domanhhuyy@gmail.com"; // Địa chỉ email của bạn
-        String password = "fcrd gxmd apio focw"; // Mật khẩu email của bạn
+        if (user == null || user.getEmail() == null || user.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("Email không hợp lệ");
+        }
 
-        // Cấu hình properties
+        String host = "smtp.gmail.com";
+        String port = "587";
+        String username = "domanhhuyy@gmail.com";
+        String password = "fcrd gxmd apio focw";
+
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", port);
 
-        // Tạo session
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -58,17 +59,16 @@ public class SendEmail {
         });
 
         try {
-            // Tạo message
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(user.getEmail()));
             message.setSubject("Verify Code");
             message.setText("Registered successfully. Please verify your account using this code: " + gr);
 
-            // Gửi email
             Transport.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new RuntimeException("Gửi email thất bại: " + e.getMessage());
         }
     }
 

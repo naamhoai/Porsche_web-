@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 
             // Kiểm tra nếu email chưa tồn tại trong DB
             if (!valid.isEmailExists(email)) {
-                request.setAttribute("error", "❌ Email chưa được đăng ký! Vui lòng kiểm tra lại.");
+                request.setAttribute("error", "❌ Email chưa được đăng ký.");
                 request.setAttribute("loginEmail", email); // Giữ lại email đã nhập
                 request.getRequestDispatcher("login.jsp").forward(request, response);
                 return;
@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
             // Kiểm tra nếu email đúng nhưng sai mật khẩu
             User user = udao.userLogin(email, password);
             if (user == null) {
-                request.setAttribute("error", "❌ Mật khẩu không đúng! Vui lòng nhập lại.");
+                request.setAttribute("error", "❌ Mật khẩu không đúng.");
                 request.setAttribute("loginEmail", email);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
                 return;

@@ -1,28 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
 
 import model.User;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 /**
- *
- * @author nam
+ * Lớp kiểm tra dữ liệu hợp lệ trong database
  */
-public class ValidDAO extends DBContext {
+public class ValidDAO extends DBContext { // Kế thừa DBContext để dùng connection
 
     // Kiểm tra email đã tồn tại chưa
     public boolean isEmailExists(String email) {
-        String sql = "SELECT * FROM users WHERE email = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
-            return rs.next(); // Trả về true nếu email đã tồn tại
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Nếu số lượng > 0, email đã tồn tại
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -31,12 +27,13 @@ public class ValidDAO extends DBContext {
 
     // Kiểm tra số điện thoại đã tồn tại chưa
     public boolean isPhoneExists(String phone) {
-        String sql = "SELECT * FROM users WHERE phone = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+        String sql = "SELECT COUNT(*) FROM users WHERE phone = ?";
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, phone);
             ResultSet rs = st.executeQuery();
-            return rs.next(); // Trả về true nếu số điện thoại đã tồn tại
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Nếu số lượng > 0, số điện thoại đã tồn tại
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,8 +43,7 @@ public class ValidDAO extends DBContext {
     // Lấy thông tin user bằng email
     public User getUserByEmail(String email) {
         String sql = "SELECT * FROM users WHERE email = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
+        try (PreparedStatement st = connection.prepareStatement(sql)) {
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -65,5 +61,4 @@ public class ValidDAO extends DBContext {
         }
         return null;
     }
-
 }

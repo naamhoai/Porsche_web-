@@ -95,12 +95,32 @@
                 errorText.innerText = ""; // Xóa lỗi nếu đúng
                 return true;
             }
-            
+
             function validateForm() {
                 return validatePassword();
             }
-            
-        </script>                           
+
+        </script>    
+
+        <script>
+            function validateEmail() {
+                var email = document.getElementById("email").value;
+                var emailError = document.getElementById("email-error");
+
+                fetch("check-email?email=" + email)
+                        .then(response => response.text())
+                        .then(data => {
+                            if (data === "exists") {
+                                emailError.innerText = "❌ Email này đã tồn tại, vui lòng nhập email khác.";
+                            } else {
+                                emailError.innerText = "";
+                            }
+                        });
+            }
+
+            document.getElementById("email").addEventListener("input", validateEmail);
+        </script>
+
 
         <%@include file="includes/foot.jsp" %>
         <%@include file="includes/footer.jsp" %>
