@@ -43,8 +43,17 @@
                             <form action="update-product">
                                 <div class="form-group">
                                     <label>Mã sản phẩm: </label>
-                                    <input type="text" class="form-control" name="id" placeholder="Enter id" required/>
+                                    <input type="number" class="form-control" id="product-id" name="id" placeholder="Enter id" required min="1" max="15"/>
+                                    <small id="id-error" style="color: red;"></small>
                                 </div>
+
+                                <script>
+                                    document.getElementById("product-id").addEventListener("input", function () {
+                                        this.value = (this.value < 1 || this.value > 15) ? "" : this.value;
+                                        document.getElementById("id-error").innerText = this.value ? "" : "❌ Chỉ nhập số từ 1 đến 15!";
+                                    });
+                                </script>
+                                
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                 </div>

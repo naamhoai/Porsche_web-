@@ -49,7 +49,7 @@ List<Product> list = pdao.getAllProducts();
         %>
     </head>
     <body>
-        <div class="container container-fluid">
+        <div class="container-fluid">
             <div class="card-header my-3 d-flex align-items-center justify-content-between">
                 <a href="to-admin"><h5>Bảng điều khiển</h5></a>
                 <a class="nav-link" href="logout">Đăng xuất</a>
